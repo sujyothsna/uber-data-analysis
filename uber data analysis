@@ -1,0 +1,45 @@
+Cache mapping techniques determine how data is mapped from the main memory to the cache. There are three common cache mapping techniques: direct mapping, set-associative mapping, and fully associative mapping. Let's discuss each technique with an example:
+
+1. **Direct Mapping:**
+   - In direct mapping, each block of main memory can only be mapped to one specific cache line.
+   - The mapping is done using a modulo operation on the block number.
+   - It's a simple and efficient technique but can lead to conflicts when multiple blocks map to the same cache line.
+
+   **Example:**
+   - Suppose we have a cache with 8 lines and a main memory with 32 blocks.
+   - Each block in main memory is mapped to a specific line in the cache using the modulo operation: cache_line = block_number % number_of_cache_lines.
+   - Block 0 maps to cache line 0, block 1 maps to cache line 1, and so on. If a block maps to a line that's already occupied, a replacement policy (like Least Recently Used - LRU) is applied.
+
+2. **Set-Associative Mapping:**
+   - Set-associative mapping is a compromise between direct and fully associative mapping.
+   - It divides the cache into sets, and each set contains multiple lines.
+   - A block from main memory can be mapped to any line within a specific set.
+
+   **Example:**
+   - Let's consider a 4-way set-associative cache with 16 lines and a main memory with 64 blocks.
+   - The cache is divided into 16 sets, each containing 4 lines.
+   - Block 0 can be mapped to any line in set 0 (lines 0-3), block 1 to any line in set 1, and so on.
+   - This provides more flexibility than direct mapping, reducing conflicts.
+
+3. **Fully Associative Mapping:**
+   - In fully associative mapping, each block in main memory can be placed in any line of the cache.
+   - There are no restrictions on where a block can be placed in the cache.
+
+   **Example:**
+   - Consider a fully associative cache with 32 lines and a main memory with 32 blocks.
+# Plotting the number of trips by day of the week
+barplot(trips_by_day$Rides, names.arg = trips_by_day$DayOfWeek, 
+        col = "skyblue", main = "Number of Uber Trips by Day of the Week",
+        xlab = "Day of the Week", ylab = "Total Trips")
+
+# Example analysis: Average number of trips by hour of the day
+trips_by_hour <- aggregate(Rides ~ HourOfDay, data = uber_data, FUN = mean)
+
+# Plotting the average number of trips by hour of the day
+plot(trips_by_hour$HourOfDay, trips_by_hour$Rides, type = "l", 
+     col = "red", main = "Average Number of Uber Trips by Hour of the Day",
+     xlab = "Hour of the Day", ylab = "Average Trips")
+   - Any block in main memory can be placed in any line of the cache. There are no set restrictions.
+   - This provides the highest flexibility but may require more complex hardware for searching and managing the cache.
+
+Cache mapping techniques play a crucial role in the performance of a cache system, and the choice depends on factors like hardware complexity, cost, and the specific access patterns of the applications running on the system.
